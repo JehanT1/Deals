@@ -30,7 +30,7 @@
         }
 
         #map {
-            height: 700px;
+            height: 400px;
             width: 100%;
         }
 
@@ -56,6 +56,7 @@
             color: black !important;
             padding: 0px 5px 5px 5px;
         }
+
         /* css grid */
 
         .grid-container {
@@ -69,20 +70,18 @@
         /* Style for each grid item */
         .grid-item {
             position: relative;
-            /* border: 1px solid #ccc; */
             padding: 10px;
             text-align: center;
             max-width: 280px;
             display: flex;
             flex-direction: column;
-            /* justify-content: space-around; */
             align-items: center;
             background-color: white;
         }
 
         .grid-item img {
             /* max-width: 220px; */
-            width: 250px;
+            width: 235px;
             height: 230px;
             margin-bottom: 5px;
             padding: 0px 0px;
@@ -120,6 +119,66 @@
         .grid-item_location:hover {
             background: rgb(0 0 0 / .2);
             transition: ease-in-out 5ms;
+        }
+
+        /* mobile version */
+        @media (max-width: 572px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .grid-item {
+                max-width: 200px;
+                padding: 0px 0px;
+            }
+            .grid-item img {
+                /* max-width: 220px; */
+                max-width: 200px;
+                height: 200px;
+                border: none;
+                width: 100%;
+            }
+            .grid-item_title {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 18px;
+            }
+            .grid-item_service {
+                padding: 0 7px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 467px) {
+            .grid-container {
+                gap: 5px;
+                row-gap: 15px;
+            }
+
+            .grid-item img {
+                max-width: 150px;
+                height: 150px;
+                width: 100%;
+                border: none;
+            }
+
+            .grid-item {
+                max-width: 150px;
+                padding: 0px 0px;
+                margin: 10px 20px ;
+            }
+
+            .grid-item_title {
+                font-size: 11px;
+                font-weight: 500;
+                line-height: 18px;
+
+            }
+
+            .grid-item_service {
+                padding: 0 10px;
+                font-size: 9px;
+            }
         }
     </style>
 
@@ -169,7 +228,7 @@
                         </div>
                     </div>
                     <div class="col-12 mt-5">
-                        <div class="row g-5 grid-container"  id="clientGridWrapper">
+                        <div class="row g-5 grid-container" id="clientGridWrapper">
                         </div>
                     </div>
                 </div>
@@ -192,7 +251,7 @@
                 var truncatedProducts = res[i].productsAndServices.length > maxCharacters ?
                     res[i].productsAndServices.substring(0, maxCharacters) + '...' :
                     res[i].productsAndServices;
-                var clientCard = '<div class="grid-item item" data-search-keywords ="'+res[i].productsAndServices+'"> <a href="#" class="row p-1 clientCard h-100" style="text-decoration:none;"><img src="'+res[i].imageUrl+'" alt="'+res[i].name+'" /><p class="grid-item_title">'+res[i].name+'</p> <p class="grid-item_service">'+truncatedProducts+'</p></a></div>';
+                var clientCard = '<div class="grid-item item" data-search-keywords ="' + res[i].productsAndServices + '"> <a href="#" class="row p-1 clientCard h-100" style="text-decoration:none;"><img src="' + res[i].imageUrl + '" alt="' + res[i].name + '" /><p class="grid-item_title">' + res[i].name + '</p> <p class="grid-item_service">' + truncatedProducts + '</p></a></div>';
                 $("#clientGridWrapper").append(clientCard);
             }
 
@@ -220,7 +279,7 @@
                     var lat = parseFloat(res[i].latitude);
                     var lng = parseFloat(res[i].longitude);
                     var marker = new google.maps.Marker({
-                        position: { lat: lat, lng: lng},
+                        position: { lat: lat, lng: lng },
                         map: map,
                         title: (res[i].name)
                     });
