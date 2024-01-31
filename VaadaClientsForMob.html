@@ -21,7 +21,7 @@
 
     <style>
         body {
-            background-color: #ffffff;
+            background-color: #d3d3d354;
             overflow-x: hidden;
         }
 
@@ -79,6 +79,7 @@
             flex-direction: column;
             align-items: center;
             background-color: white;
+            border: 1px solid #a9a9a98a;
         }
 
         .grid-item img {
@@ -88,6 +89,7 @@
             margin-bottom: 5px;
             padding: 0px 0px;
             border: 1px solid #ccc;
+            border-bottom: 1px solid #a9a9a966!important;
         }
 
 
@@ -95,7 +97,7 @@
             font-size: 18px;
             font-weight: 700;
             margin: 5px 5px;
-            line-height: 18px;
+            line-height: 20px;
             color: #0a58cae3 !important;
         }
 
@@ -146,7 +148,7 @@
                 width: 89%;
                 position: relative;
                 top: -4px;
-                border: -1px;
+                border: none;
                 margin: 0px;
             }
             .grid-item_title {
@@ -164,7 +166,6 @@
             .grid-item img {
                 height: 140px;
                 position: relative;
-                border: -1px;
                 top: -4px;
             }
             .grid-item_title {
@@ -183,12 +184,12 @@
                 height: 134px;
                 position: relative;
                 top: -5px;
-                border: -1px;
             }
             .grid-item_title {
                 font-size: 12px;
                 font-weight: 500;
                 line-height: 18px;
+                margin: 5px 0px 1px 0px;
             }
             .grid-item_service {
                 padding: 0 7px;
@@ -200,13 +201,14 @@
             .grid-container {
                 gap: 5px;
                 row-gap: 15px;
+                width: 108%;
             }
 
             .grid-item img {
                 max-width: 89%;
                 height: 135px;
                 width: 100%;
-                border: -1px;
+                border: none;
                 position: relative;
                 top: -5px;
             }
@@ -214,20 +216,22 @@
             .grid-item {
                 max-width: 150px;
                 padding: 0px 0px;
-                margin: 10px 20px ;
+                margin: 0px 0px ;
+                height: 177px;
             }
 
             .grid-item_title {
                 font-size: 10px;
                 font-weight: 500;
-                line-height: 18px;
-                height: 17%;
+                line-height: 14px;
+                height: 15%;
+                margin: 5px 0px 5px 0px;
 
             }
 
             .grid-item_service {
-                padding: 0 8px;
-                font-size: 8.4px;
+                padding: 0 7px;
+                font-size: 7.8px;
                 margin-bottom: 4px;
 
             }
@@ -242,30 +246,34 @@
                 max-width: 89%;
                 height: 130px;
                 width: 100%;
-                border: -1px;
+                border: none;
                 position: relative;
                 top: -5px;
             }
         }
         @media (max-width: 415px) {
             .grid-item img {
-                max-width: 89%;
-                height: 125px;
+                max-width: 88.7%;
+                height: 120px;
                 width: 100%;
-                border: -1px;
+                border: none;
                 position: relative;
-                top: -5px;
+                top: -4px;
             }
         }
 
         @media (max-width:390px ){
             .grid-item img {
-                max-width: 88.5%;
+                max-width: 87.7%;
                 height: 114px;
                 width: 100%;
-                border: -1px;
+                border: none;
                 position: relative;
                 top: -4px;
+            }
+            .grid-item_service {
+                padding: 0 4px;
+
             }
         }
         .proper{
@@ -317,13 +325,11 @@
         type: "GET",
         success: function (res) {
             for (var i = 0; i < res.length; i++) {
-                var maxCharacters = 50; // Set the maximum number of characters you want to display
+                var maxCharacters = 40; // Set the maximum number of characters you want to display
                 var truncatedProducts = res[i].productsAndServices.length > maxCharacters ?
                     res[i].productsAndServices.substring(0, maxCharacters) + '...' :
                     res[i].productsAndServices;
-                //var customProducts = res[i].customProducts;
                 var searchTerm = res[i].customProducts + res[i].productsAndServices;
-                console.log(searchTerm);
                 var clientCard = '<div class="grid-item item" data-search-keywords ="' + searchTerm + '"> <a href="#" class="row p-1 clientCard h-100" style="text-decoration:none;"><img src="' + res[i].imageUrl + '" alt="' + res[i].name + '" /><div class="new"> <p class="grid-item_title">' + res[i].name + '</p> <p class="grid-item_service">' + truncatedProducts + '</p></div></a></div>';
                 $("#clientGridWrapper").append(clientCard);
             }
